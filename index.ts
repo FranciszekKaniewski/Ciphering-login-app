@@ -1,6 +1,8 @@
 import * as express from 'express'
+import 'express-async-errors';
 import {Application} from "express";
 import {loginDataRoute} from "./routes/login-data-route";
+import {handleError} from "./utils/error";
 
 export class App {
     private app: Application;
@@ -22,6 +24,7 @@ export class App {
     }
 
     private run(){
+        this.app.use(handleError);
         this.app.listen(3001,'localhost', ()=>{
             console.log('Listening on http://localhost:3001/');
         })
